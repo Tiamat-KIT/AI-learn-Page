@@ -7,15 +7,15 @@ interface AllCluster {
     FirstWeightPoints: {name: string, weightPoint: PointType}[],
     ClusterClassifying?: SingleCluster[],
     Kmeans(): {
-      Clusters: SingleCluster[],
-      ResultWeightPoint:  {
-        name: string;
-        ResultWeight: {
-            x_position: number;
-            y_position: number;
-        };
-    }[]
-    }
+      Clusters: SingleCluster[];
+      weightPoint: {
+          name: string;
+          weightPoint: {
+              x_position: number;
+              y_position: number;
+          };
+      }[];
+  }
 }
 
 export class ClusterClass implements AllCluster{
@@ -62,13 +62,12 @@ export class ClusterClass implements AllCluster{
       const y = (ClusterValue.ClusterPoints.map((PontY) => {return PontY.y_position})).reduce((a,x) => {return a+x}) / ClusterValue.ClusterPoints.length
       return  {
         name: ClusterValue.Name,
-        ResultWeight:{x_position:x,y_position:y}
+        weightPoint:{x_position:x,y_position:y}
       }
     })
     return {
       Clusters: this.ClusterClassifying,
-      ResultWeightPoint: weightPoint
+      weightPoint
     }
   }
-
 }

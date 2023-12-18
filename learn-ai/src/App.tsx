@@ -14,7 +14,13 @@ function App() {
       new SingleClusterClass("3")
     ]
   )
-  const [weightPoint,setWeightPoint] = createSignal<{name: string, weightPoint: PointType}[]>(
+  const [weightPoint,setWeightPoint] = createSignal<{
+    name: string;
+    weightPoint: {
+        x_position: number;
+        y_position: number;
+    };
+}[]>(
     [
       {
         name:"1",
@@ -66,8 +72,8 @@ function App() {
 
     const ResultCluster = new ClusterClass(weightPoint(),undefined,ClusterSignal())
     setCluster(ResultCluster.Kmeans().Clusters)
-    setWeightPoint(ResultCluster.Kmeans().ResultWeightPoint)
-    console.log(ResultCluster.Kmeans().ResultWeightPoint)
+    setWeightPoint(ResultCluster.Kmeans().weightPoint)
+    console.log(ResultCluster.Kmeans().weightPoint)
     console.log(ClusterSignal())
   }
 
